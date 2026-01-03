@@ -13,16 +13,16 @@ import java.util.List;
 public class VentaDTO {
     private Long id;
     private String numeroVenta;
-    private String cajeroNombre;
+    private String cajeroNombre;  // Se envía el ID como string desde el front
     private String clienteNombre;
     private List<DetalleVentaDTO> detalles;
     private BigDecimal subtotal;
     private BigDecimal descuento;
     private BigDecimal total;
-
     private String metodoPago;
     private String estado;
     private Boolean pagada;
     private Long partidoId;
+    private Long polideportivoId;  // ✅ AGREGADO
     private LocalDateTime fechaVenta;
 }

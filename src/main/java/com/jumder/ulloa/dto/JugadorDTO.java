@@ -24,7 +24,10 @@ public class JugadorDTO {
     private Long equipoId;
     private String equipoNombre;
     private Boolean carnetPagado;
+    private Boolean activo;
     private Boolean verificado;
+
+    // Estadísticas
     private Integer goles;
     private Integer asistencias;
     private Integer tarjetasAmarillas;

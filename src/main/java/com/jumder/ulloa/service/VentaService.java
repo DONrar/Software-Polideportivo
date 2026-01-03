@@ -29,13 +29,15 @@ public class VentaService {
     private final PartidoRepository partidoRepository;
     private final PolideportivoRepository polideportivoRepository;
 
+    // ACTUALIZACIÓN en VentaService - Método registrarVenta
     @Transactional
     public VentaDTO registrarVenta(VentaDTO dto) {
         // Validaciones
         Usuario cajero = usuarioRepository.findById(Long.parseLong(dto.getCajeroNombre()))
                 .orElseThrow(() -> new RuntimeException("Cajero no encontrado"));
 
-        Polideportivo polideportivo = polideportivoRepository.findById(1L) // Obtener del contexto
+        // ✅ AHORA USA EL polideportivoId DEL DTO
+        Polideportivo polideportivo = polideportivoRepository.findById(dto.getPolideportivoId())
                 .orElseThrow(() -> new RuntimeException("Polideportivo no encontrado"));
 
         // Crear venta
@@ -99,6 +101,7 @@ public class VentaService {
 
         return convertirADTO(venta);
     }
+
 
     private void registrarMovimientoInventario(Producto producto, Integer cantidad, Usuario usuario, Venta venta) {
         MovimientoInventario movimiento = new MovimientoInventario();
@@ -164,7 +167,7 @@ public class VentaService {
     public List<Producto> listarProductosBajoStock(Long polideportivoId) {
         return productoRepository.findProductosBajoStock(polideportivoId);
     }
-
+    // El método convertirADTO también debe incluir polideportivoId
     private VentaDTO convertirADTO(Venta venta) {
         VentaDTO dto = new VentaDTO();
         dto.setId(venta.getId());
@@ -178,6 +181,7 @@ public class VentaService {
         dto.setEstado(venta.getEstado().name());
         dto.setPagada(venta.getPagada());
         dto.setFechaVenta(venta.getFechaVenta());
+        dto.setPolideportivoId(venta.getPolideportivo().getId());  // ✅ AGREGADO
 
         if (venta.getPartido() != null) {
             dto.setPartidoId(venta.getPartido().getId());

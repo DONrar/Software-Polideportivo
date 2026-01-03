@@ -8,19 +8,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.Data;
+import java.math.BigDecimal;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductoDTO {
     private Long id;
     private String nombre;
     private String descripcion;
     private BigDecimal precio;
     private BigDecimal costo;
-    private String categoria;
-    private String codigoBarras;
-    private String imagen;
     private Integer stock;
     private Integer stockMinimo;
+    private String categoria;
     private Boolean activo;
+    private Long polideportivoId;
 }
